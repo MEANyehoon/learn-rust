@@ -4,7 +4,7 @@
 
 
 在这篇文章中，我们会看到如何组织一个容易测试的Rust项目的结构。我们会实现一个简单的验证模块。
-该模块对外通过REST API暴露，使用PostgreSQL和Redis存储数据。使用actix-web处理REST API部分，使用sqlx和PostgreSQL交互，使用redis-rs和Redis交互。我们会看到如何将该模块分解为容易测试的一个个小组件。最终版本的源代码可以在GitHub查看。
+该模块对外通过REST API暴露，使用PostgreSQL和Redis存储数据。使用[`actix-web`](https://crates.io/crates/actix-web)处理REST API部分，使用[`sqlx`](https://crates.io/crates/sqlx)和PostgreSQL交互，使用[`redis-rs`](https://crates.io/crates/redis_rs)和Redis交互。我们会看到如何将该模块分解为容易测试的一个个小组件。最终版本的源代码可以在GitHub查看。
 
 
 
@@ -184,7 +184,7 @@ impl <A, B> AuthService for AuthServiceImpl<A, B>
 }
 ```
 
-在测试部分，我们只测试`login`功能，因为其它功能非常简单。我们为`TokenRepo`和`CredentialRepo`mock了测试替身。这些mock允许我们为Ports模拟各种不同的响应来验证`login`功能的正确性。我们通过`mockall`库来实现这些mock,之前已经在Port `trait`上标明了`#[cfg_attr(test, mockall::automock)]`.
+在测试部分，我们只测试`login`功能，因为其它功能非常简单。我们为`TokenRepo`和`CredentialRepo`mock了测试替身。这些mock允许我们为Ports模拟各种不同的响应来验证`login`功能的正确性。我们通过[`mockall`](https://crates.io/crates/mockall)库来实现这些mock,之前已经在Port `trait`上标明了`#[cfg_attr(test, mockall::automock)]`.
 
 ```rust
 #[cfg(test)]
